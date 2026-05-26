@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamer Name Generator</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #111, #1e1e1e);
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        h1 {
+            font-size: 50px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 22px;
+            border: none;
+            border-radius: 12px;
+            background: #7c3aed;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #name {
+            margin-top: 40px;
+            font-size: 45px;
+            color: #00ffcc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>🎮 Gamer Name Generator</h1>
+
+    <button onclick="generateName()">
+        Generate Name
+    </button>
+
+    <div id="name"></div>
+
+    <script>
+        const names = [
+            "ShadowX",
+            "NightFury",
+            "GhostViper",
+            "DarkNova",
+            "ToxicAim",
+            "VenomStrike",
+            "CryoWolf",
+            "StormShot",
+            "PixelHunter",
+            "InfernoZX",
+            "NovaGhost",
+            "SilentKill",
+            "ReaperAim",
+            "VoidRunner",
+            "BlazeShot"
+        ];
+
+        function generateName() {
+            const random =
+                names[Math.floor(Math.random() * names.length)];
+
+            document.getElementById("name").innerText = random;
+        }
+    </script>
+
+</body>
+</html>
