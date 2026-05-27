@@ -18,47 +18,88 @@
 
 }
 
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #0f0f0f, #1a1a1a);
-            color: white;
-            text-align: center;
-            padding-top: 80px;
-        }
+      body {
 
-        h1 {
-            font-size: 55px;
-        }
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background:
+    radial-gradient(circle at top left, #7c3aed33, transparent 30%),
+    radial-gradient(circle at bottom right, #00ffcc22, transparent 30%),
+    linear-gradient(135deg, #0a0a0a, #141414);
+
+    color: white;
+    text-align: center;
+    padding-top: 80px;
+    overflow-x: hidden;
+
+}
+
+      h1 {
+
+    font-size: 60px;
+    text-shadow:
+    0 0 10px #7c3aed,
+    0 0 20px #7c3aed,
+    0 0 40px #7c3aed;
+
+}
 
         p {
             color: #aaaaaa;
             font-size: 20px;
         }
 
-        button {
-            margin-top: 40px;
-            padding: 18px 40px;
-            font-size: 22px;
-            border: none;
-            border-radius: 14px;
-            background: #7c3aed;
-            color: white;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+      button {
 
-        button:hover {
-            transform: scale(1.05);
-            background: #9f67ff;
-        }
+    margin-top: 20px;
+    padding: 18px 40px;
+    font-size: 22px;
+    border: none;
+    border-radius: 14px;
 
-        #name {
-            margin-top: 50px;
-            font-size: 50px;
-            color: #00ffcc;
-            font-weight: bold;
-        }
+    background:
+    linear-gradient(135deg,#7c3aed,#00c3ff);
+
+    color: white;
+    cursor: pointer;
+
+    transition: 0.25s;
+
+    box-shadow:
+    0 0 15px #7c3aed88;
+
+}
+
+button:hover {
+
+    transform: scale(1.08);
+
+    box-shadow:
+    0 0 25px #7c3aed,
+    0 0 50px #00c3ff;
+
+}
+
+     #name {
+
+    margin-top: 50px;
+    font-size: 60px;
+
+    background:
+    linear-gradient(90deg,#00ffcc,#7c3aed);
+
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    font-weight: bold;
+
+    text-shadow:
+    0 0 20px #00ffcc55;
+
+    animation: pulse 2s infinite;
+
+}
 
         .back {
             position: absolute;
@@ -74,6 +115,22 @@
         .back:hover {
             background: #333;
         }
+
+        @keyframes pulse {
+
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+
+}
 
     </style>
 </head>
@@ -215,6 +272,12 @@ const endings = [
 "VFX","OP","MVP","Nuke",
 "Power","Prime","X","YT_",
 "TV_","lol","xd","zzz"
+"Anime","RL","Valorant","FNCS",
+"Sigma","Demon","Beamer","Cracked",
+"EditGod","Builder","Sweaty","Tryhard",
+"TikTok","TTV","Streamer","Sensei",
+"Kage","Uchiha","Gojo","Zoro",
+"Ghosted","Rekt","NoScope","OnePump"
 
 ];
 
