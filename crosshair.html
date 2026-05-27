@@ -8,6 +8,51 @@
 
 <style>
 
+#equipped-crosshair {
+
+    position: fixed;
+
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    width: 200px;
+    height: 200px;
+
+    pointer-events: none;
+
+    display: none;
+
+}
+    
+button {
+
+    margin: 10px;
+
+    padding: 15px 25px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+    linear-gradient(135deg,#7c3aed,#00c3ff);
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+}
+
+button:hover {
+
+    transform: scale(1.05);
+
+}
+    
 body {
 
     margin: 0;
@@ -151,6 +196,16 @@ input {
     <p>Thickness</p>
     <input type="range" id="thickness" min="2" max="20" value="6">
 
+<br><br>
+
+<button onclick="saveCrosshair()">
+    💾 Save Crosshair
+</button>
+
+<button onclick="toggleEquip()">
+    🎮 Equip Crosshair
+</button>
+    
 </div>
 
 <div class="crosshair-box">
@@ -162,6 +217,15 @@ input {
 
 </div>
 
+<div id="equipped-crosshair">
+
+    <div class="line" id="etop"></div>
+    <div class="line" id="ebottom"></div>
+    <div class="line" id="eleft"></div>
+    <div class="line" id="eright"></div>
+
+</div>
+    
 <script>
 
 const colorPicker =
@@ -228,6 +292,75 @@ thicknessSlider.addEventListener("input", updateCrosshair);
 
 updateCrosshair();
 
+let equipped = false;
+
+function saveCrosshair() {
+
+    localStorage.setItem(
+        "crosshairColor",
+        colorPicker.value
+    );
+
+    localStorage.setItem(
+        "crosshairSize",
+        sizeSlider.value
+    );
+
+    localStorage.setItem(
+        "crosshairThickness",
+        thicknessSlider.value
+    );
+
+    alert("Crosshair Saved!");
+
+}
+
+function toggleEquip() {
+
+    equipped = !equipped;
+
+    const equippedCrosshair =
+    document.getElementById(
+        "equipped-crosshair"
+    );
+
+    if (equipped) {
+
+        equippedCrosshair.style.display =
+        "block";
+
+        updateEquipped();
+
+    }
+
+    else {
+
+        equippedCrosshair.style.display =
+        "none";
+
+    }
+
+}
+
+function updateEquipped() {
+
+    const color =
+    colorPicker.value;
+
+    const lines2 =
+    document.querySelectorAll(
+        "#equipped-crosshair .line"
+    );
+
+    lines2.forEach(line => {
+
+        line.style.background =
+        color;
+
+    });
+
+}
+    
 </script>
 
 </body>
