@@ -220,11 +220,33 @@ const endings = [
 
 function generateName() {
 
+    const selectedLetter =
+        document.getElementById("letter").value;
+
+    let filtered = names;
+
+    if (selectedLetter !== "") {
+
+        filtered = names.filter(name =>
+            name.startsWith(selectedLetter)
+        );
+
+    }
+
+    if (filtered.length === 0) {
+
+        document.getElementById("name").innerText =
+            "No names found";
+
+        return;
+
+    }
+
     const randomFirst =
-        first[Math.floor(Math.random() * first.length)];
+        filtered[Math.floor(Math.random() * filtered.length)];
 
     const randomSecond =
-        second[Math.floor(Math.random() * second.length)];
+        endings[Math.floor(Math.random() * endings.length)];
 
     const finalName =
         randomFirst + randomSecond;
