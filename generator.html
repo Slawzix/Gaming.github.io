@@ -83,45 +83,111 @@
         Generate Name
     </button>
 
+    <br>
+
+<button onclick="copyName()">
+    Copy Name
+</button>
+
     <div id="name"></div>
 
-    <script>
+  <script>
 
-        const names = [
+const first = [
 
-            "ShadowX",
-            "NightFury",
-            "GhostViper",
-            "DarkNova",
-            "ToxicAim",
-            "VenomStrike",
-            "CryoWolf",
-            "StormShot",
-            "PixelHunter",
-            "InfernoZX",
-            "NovaGhost",
-            "SilentKill",
-            "ReaperAim",
-            "VoidRunner",
-            "BlazeShot",
-            "FrostByte",
-            "HyperGhost",
-            "PhantomV",
-            "ZeroHunter",
-            "DarkPulse"
+"Shadow",
+"Dark",
+"Ghost",
+"Nova",
+"Blaze",
+"Venom",
+"Frost",
+"Hyper",
+"Silent",
+"Void",
+"Storm",
+"Toxic",
+"Reaper",
+"Phantom",
+"Night",
+"Inferno",
+"Zero",
+"Cyber",
+"Alpha",
+"Omega",
+"Rapid",
+"Fatal",
+"Crazy",
+"Pixel",
+"Thunder",
+"Crystal",
+"Dragon",
+"Wolf",
+"Sniper",
+"Fire"
 
-        ];
+];
 
-        function generateName() {
+const second = [
 
-            const random =
-                names[Math.floor(Math.random() * names.length)];
+"X",
+"Shot",
+"Hunter",
+"Strike",
+"Viper",
+"ZX",
+"Runner",
+"Aim",
+"Kill",
+"Pulse",
+"YT",
+"FN",
+"Ghost",
+"Player",
+"Gaming",
+"Pro",
+"Live",
+"OnTop",
+"Xx",
+"77",
+"999",
+"TV",
+"GG",
+"Clan",
+"FPS",
+"Zone",
+"Prime",
+"Wave",
+"Edge",
+"King"
 
-            document.getElementById("name").innerText = random;
+];
 
-        }
+function generateName() {
 
-    </script>
+    const randomFirst =
+        first[Math.floor(Math.random() * first.length)];
 
-</body>
-</html>
+    const randomSecond =
+        second[Math.floor(Math.random() * second.length)];
+
+    const finalName =
+        randomFirst + randomSecond;
+
+    document.getElementById("name").innerText =
+        finalName;
+
+}
+
+function copyName() {
+
+    const text =
+        document.getElementById("name").innerText;
+
+    navigator.clipboard.writeText(text);
+
+    alert("Copied: " + text);
+
+}
+
+</script>
