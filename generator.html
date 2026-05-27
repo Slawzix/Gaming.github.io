@@ -7,6 +7,17 @@
 
     <style>
 
+        select {
+
+    padding: 12px 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 18px;
+    background: #222;
+    color: white;
+
+}
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -75,6 +86,43 @@
 
     <h1>🎯 Gamer Name Generator</h1>
 
+    <br><br>
+
+<select id="letter">
+
+    <option value="">Any Letter</option>
+
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+    <option value="D">D</option>
+    <option value="E">E</option>
+    <option value="F">F</option>
+    <option value="G">G</option>
+    <option value="H">H</option>
+    <option value="I">I</option>
+    <option value="J">J</option>
+    <option value="K">K</option>
+    <option value="L">L</option>
+    <option value="M">M</option>
+    <option value="N">N</option>
+    <option value="O">O</option>
+    <option value="P">P</option>
+    <option value="Q">Q</option>
+    <option value="R">R</option>
+    <option value="S">S</option>
+    <option value="T">T</option>
+    <option value="U">U</option>
+    <option value="V">V</option>
+    <option value="W">W</option>
+    <option value="X">X</option>
+    <option value="Y">Y</option>
+    <option value="Z">Z</option>
+
+</select>
+
+<br><br>
+
     <p>
         Generate awesome gamer names instantly.
     </p>
@@ -93,73 +141,80 @@
 
   <script>
 
-const first = [
+const names = [
 
-"Shadow",
-"Dark",
-"Ghost",
-"Nova",
-"Blaze",
-"Venom",
-"Frost",
-"Hyper",
-"Silent",
-"Void",
-"Storm",
-"Toxic",
-"Reaper",
-"Phantom",
-"Night",
-"Inferno",
-"Zero",
-"Cyber",
-"Alpha",
-"Omega",
-"Rapid",
-"Fatal",
-"Crazy",
-"Pixel",
-"Thunder",
-"Crystal",
-"Dragon",
-"Wolf",
-"Sniper",
-"Fire"
+"Astro","Abyss","Ace","Alpha","Anarchy","Atomic","Apex","Arctic","Angel","Assault","Avenger","Arcade",
+
+"Blaze","Bullet","Beast","Byte","Brawler","Blood","Breaker","Burn","Blade","Blast","Bounty","Brick",
+
+"Cyber","Cryo","Clutch","Chaos","Crusher","Circuit","Core","Cobra","Carnage","Champion","Crash","Control",
+
+"Dark","Dragon","Demon","Delta","Dagger","Danger","Drift","Dusk","Destroyer","Dream","Dynamo","Dread",
+
+"Echo","Elite","Edge","Eternal","Ember","Error","Energy","Eclipse","Element","Emperor","Enigma","Evolution",
+
+"Fatal","Frost","Flame","Flash","Fury","Fusion","Fear","Fighter","Falcon","Freeze","Force","Future",
+
+"Ghost","Glitch","Galaxy","Gravity","Grinder","Gunner","Glow","Golem","Gladiator","Giga","Guardian","Genius",
+
+"Hyper","Hunter","Havoc","Hex","Horizon","Hydra","Hazard","Hero","Hacker","Hellfire","Hammer","HunterX",
+
+"Inferno","Ice","Impact","Ion","Illusion","Instinct","Ivory","Infinity","Invoker","Iron","Impulse","Iceberg",
+
+"Joker","Jet","Jinx","Justice","Jaguar","Jammer","Jungle","Jester","Judgment","Javelin","JumpShot","Jade",
+
+"Knight","Kraken","Karma","King","Killer","Kick","Knightmare","Krypton","Knockout","Katana","Kinetic","Kodiak",
+
+"Legend","Laser","Lunar","Logic","Lightning","Limit","Legacy","Lock","Lethal","Lucid","Lava","Loop",
+
+"Matrix","Mystic","Magma","Monster","Mirage","Mercury","Machine","Moon","Madness","Maverick","Metal","Midnight",
+
+"Nova","Night","Neon","Nexus","Nitro","Nemesis","Ninja","Nuclear","Nightmare","Network","Noble","Neo",
+
+"Omega","Onyx","Orbit","Overkill","Oblivion","Oracle","Origin","Outlaw","Overdrive","Oxide","Operator","Omen",
+
+"Phantom","Pixel","Pulse","Prime","Predator","Psycho","Plasma","Phoenix","Power","Poison","PixelX","PulseFire",
+
+"Quantum","Quick","Quasar","Quake","Quest","Quickshot","Queen","QuantumX","Quickscope","Quiver","Quantic","QuasarX",
+
+"Rapid","Rogue","Reaper","Rift","Razor","Raven","Rage","Rocket","Revolt","Rampage","Ronin","Reflex",
+
+"Shadow","Sniper","Storm","Strike","Savage","Skull","Smoke","Spectre","Shiver","Shock","Supreme","Slayer",
+
+"Toxic","Thunder","Titan","Tempest","Turbo","Trigger","Tundra","Terror","TempestX","Thunderbolt","Tracker","Tactical",
+
+"Ultra","Unity","Urban","Undead","Unknown","Upgrade","Universe","Uprising","UltraX","Umbra","Ultimate","Unreal",
+
+"Venom","Vortex","Volt","Vision","Viper","Velocity","Virus","Void","Vandal","Virtual","Venator","Victory",
+
+"Wolf","Wrath","Wild","Wave","Warrior","Wizard","Wicked","Winter","Warden","Warp","Wraith","Wildfire",
+
+"Xeno","Xtreme","XShadow","Xplode","XenoCore","XShot","XenoWave","Xenon","XBlade","XHunter","XStorm","XVoid",
+
+"Yeti","Yolo","Yurei","Yield","YoungBlood","Yakuza","Yellow","Yonder","Ymir","Yard","Yotta","Yokai",
+
+"Zero","Zenith","Zombie","Zodiac","Zap","Zone","Zephyr","Zetta","Zoner","Zen","Zapper","ZBlade"
 
 ];
 
-const second = [
+const endings = [
 
-"X",
-"Shot",
-"Hunter",
-"Strike",
-"Viper",
-"ZX",
-"Runner",
-"Aim",
-"Kill",
-"Pulse",
-"YT",
-"FN",
-"Ghost",
-"Player",
-"Gaming",
-"Pro",
-"Live",
-"OnTop",
-"Xx",
-"77",
-"999",
-"TV",
-"GG",
-"Clan",
-"FPS",
-"Zone",
-"Prime",
-"Wave",
-"Edge",
-"King"
+"X","FPS","YT","TV","Prime",
+"Shot","Kill","Aim","Ghost",
+"Wave","Clan","GG","Zone",
+"777","999","Live","Pro",
+"Gaming","OnTop","V2","HD",
+"XD","TTV","RL","FN","GOAT",
+"Skill","Elite","Master","Shadow",
+"Void","Fire","Storm","Hunter",
+"Plays","Core","Army","Empire",
+"World","Bot","Tryhard","Killer",
+"OneTap","zz","PvP","Edit",
+"Cracked","Clips","God","Legend",
+"Beam","Laser","Toxic","Sweat",
+"VFX","OP","MVP","Nuke",
+"Power","Prime","X","YT_",
+"TV_","lol","xd","zzz"
 
 ];
 
