@@ -20,6 +20,32 @@
 
 body {
 
+    </div>
+
+<div class="tools-container">
+
+    <a href="generator.html" class="tool-card">
+        🎯
+        <h2>Name Generator</h2>
+        <p>Create awesome gamer names</p>
+    </a>
+
+    <a href="#" class="tool-card">
+        ✚
+        <h2>Crosshair Generator</h2>
+        <p>Create FPS crosshairs</p>
+    </a>
+
+    <a href="#" class="tool-card">
+        🔥
+        <h2>Clan Generator</h2>
+        <p>Generate clan names</p>
+    </a>
+
+</div>
+
+<script>
+
     margin: 0;
     font-family: Arial, sans-serif;
 
@@ -325,7 +351,70 @@ button:hover {
         translateX(0px);
     }
 
-}       
+}  
+
+.tools-container {
+
+    margin-top: 80px;
+
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+
+    flex-wrap: wrap;
+
+}
+
+.tool-card {
+
+    width: 260px;
+
+    padding: 35px;
+
+    border-radius: 25px;
+
+    text-decoration: none;
+
+    color: white;
+
+    background: rgba(255,255,255,0.05);
+
+    border: 1px solid #7c3aed55;
+
+    backdrop-filter: blur(10px);
+
+    transition: 0.3s;
+
+    box-shadow:
+    0 0 20px #7c3aed22;
+
+}
+
+.tool-card:hover {
+
+    transform:
+    translateY(-10px)
+    scale(1.03);
+
+    box-shadow:
+    0 0 25px #7c3aed,
+    0 0 50px #00c3ff55;
+
+}
+
+.tool-card h2 {
+
+    margin-top: 20px;
+
+    font-size: 28px;
+
+}
+
+.tool-card p {
+
+    color: #aaa;
+
+}        
     </style>
 </head>
 
