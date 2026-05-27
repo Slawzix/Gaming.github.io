@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Crosshair Generator</title>
+
+<style>
+
+body {
+
+    margin: 0;
+    background: #0f0f0f;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+
+}
+
+h1 {
+
+    margin-top: 40px;
+    font-size: 55px;
+
+}
+
+.controls {
+
+    margin-top: 40px;
+
+}
+
+input {
+
+    margin: 15px;
+    width: 220px;
+
+}
+
+.crosshair-box {
+
+    margin: 60px auto;
+
+    width: 500px;
+    height: 500px;
+
+    background: #1a1a1a;
+
+    border-radius: 20px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    border: 2px solid #7c3aed;
+
+}
+
+.line {
+
+    position: absolute;
+    background: #00ffcc;
+
+}
+
+#top {
+
+    width: 6px;
+    height: 60px;
+
+    left: 247px;
+    top: 140px;
+
+}
+
+#bottom {
+
+    width: 6px;
+    height: 60px;
+
+    left: 247px;
+    bottom: 140px;
+
+}
+
+#left {
+
+    width: 60px;
+    height: 6px;
+
+    left: 140px;
+    top: 247px;
+
+}
+
+#right {
+
+    width: 60px;
+    height: 6px;
+
+    right: 140px;
+    top: 247px;
+
+}
+
+.back {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    background: #222;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+}
+
+.back:hover {
+
+    background: #333;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<a class="back" href="index.html">
+⬅ Back
+</a>
+
+<h1>✚ Crosshair Generator</h1>
+
+<div class="controls">
+
+    <p>Color</p>
+    <input type="color" id="color">
+
+    <p>Size</p>
+    <input type="range" id="size" min="20" max="120" value="60">
+
+    <p>Thickness</p>
+    <input type="range" id="thickness" min="2" max="20" value="6">
+
+</div>
+
+<div class="crosshair-box">
+
+    <div class="line" id="top"></div>
+    <div class="line" id="bottom"></div>
+    <div class="line" id="left"></div>
+    <div class="line" id="right"></div>
+
+</div>
+
+<script>
+
+const colorPicker =
+document.getElementById("color");
+
+const sizeSlider =
+document.getElementById("size");
+
+const thicknessSlider =
+document.getElementById("thickness");
+
+const lines =
+document.querySelectorAll(".line");
+
+function updateCrosshair() {
+
+    const color =
+    colorPicker.value;
+
+    const size =
+    sizeSlider.value;
+
+    const thickness =
+    thicknessSlider.value;
+
+    lines.forEach(line => {
+
+        line.style.background =
+        color;
+
+    });
+
+    document.getElementById("top").style.height =
+    size + "px";
+
+    document.getElementById("bottom").style.height =
+    size + "px";
+
+    document.getElementById("left").style.width =
+    size + "px";
+
+    document.getElementById("right").style.width =
+    size + "px";
+
+    document.getElementById("top").style.width =
+    thickness + "px";
+
+    document.getElementById("bottom").style.width =
+    thickness + "px";
+
+    document.getElementById("left").style.height =
+    thickness + "px";
+
+    document.getElementById("right").style.height =
+    thickness + "px";
+
+}
+
+colorPicker.addEventListener("input", updateCrosshair);
+
+sizeSlider.addEventListener("input", updateCrosshair);
+
+thicknessSlider.addEventListener("input", updateCrosshair);
+
+updateCrosshair();
+
+</script>
+
+</body>
+</html>
