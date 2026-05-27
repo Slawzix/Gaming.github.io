@@ -3,80 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamer Name Generator</title>
+    <title>Gaming Tools</title>
 
     <style>
+
         body {
-            background: linear-gradient(135deg, #111, #1e1e1e);
-            color: white;
+            margin: 0;
             font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f, #1b1b1b);
+            color: white;
             text-align: center;
-            padding-top: 100px;
         }
 
         h1 {
-            font-size: 50px;
+            margin-top: 60px;
+            font-size: 60px;
         }
 
-        button {
-            padding: 15px 40px;
-            font-size: 22px;
-            border: none;
-            border-radius: 12px;
+        p {
+            color: #bbbbbb;
+            font-size: 20px;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 80px;
+        }
+
+        .card {
+            background: #1f1f1f;
+            width: 260px;
+            padding: 40px;
+            border-radius: 20px;
+            transition: 0.25s;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 25px #7c3aed;
+        }
+
+        .card h2 {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
             background: #7c3aed;
             color: white;
-            cursor: pointer;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
             transition: 0.2s;
         }
 
-        button:hover {
-            transform: scale(1.05);
+        .btn:hover {
+            background: #9f67ff;
         }
 
-        #name {
-            margin-top: 40px;
-            font-size: 45px;
-            color: #00ffcc;
-        }
     </style>
 </head>
 
 <body>
 
-    <h1>🎮 Gamer Name Generator</h1>
+    <h1>🎮 Gaming Tools</h1>
 
-    <button onclick="generateName()">
-        Generate Name
-    </button>
+    <p>
+        The best free gaming tools for gamers.
+    </p>
 
-    <div id="name"></div>
+    <div class="container">
 
-    <script>
-        const names = [
-            "ShadowX",
-            "NightFury",
-            "GhostViper",
-            "DarkNova",
-            "ToxicAim",
-            "VenomStrike",
-            "CryoWolf",
-            "StormShot",
-            "PixelHunter",
-            "InfernoZX",
-            "NovaGhost",
-            "SilentKill",
-            "ReaperAim",
-            "VoidRunner",
-            "BlazeShot"
-        ];
+        <div class="card">
+            <h2>🎯 Gamer Name Generator</h2>
 
-        function generateName() {
-            const random =
-                names[Math.floor(Math.random() * names.length)];
+            <a class="btn" href="generator.html">
+                Open
+            </a>
+        </div>
 
-            document.getElementById("name").innerText = random;
-        }
-    </script>
+        <div class="card">
+            <h2>🔫 Crosshair Generator</h2>
+
+            <a class="btn" href="#">
+                Soon
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>⚡ Sensitivity Converter</h2>
+
+            <a class="btn" href="#">
+                Soon
+            </a>
+        </div>
+
+    </div>
 
 </body>
 </html>
