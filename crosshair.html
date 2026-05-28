@@ -24,6 +24,58 @@
 
     display: none;
 
+    z-index: 99999;
+
+}
+
+.eline {
+
+    position: absolute;
+
+    background: #00ffcc;
+
+}
+
+.vertical {
+
+    width: 6px;
+    height: 60px;
+
+    left: 97px;
+
+}
+
+.horizontal {
+
+    width: 60px;
+    height: 6px;
+
+    top: 97px;
+
+}
+
+#etop {
+
+    top: 20px;
+
+}
+
+#ebottom {
+
+    bottom: 20px;
+
+}
+
+#eleft {
+
+    left: 20px;
+
+}
+
+#eright {
+
+    right: 20px;
+
 }
     
 button {
@@ -219,13 +271,15 @@ input {
 
 <div id="equipped-crosshair">
 
-    <div class="line" id="etop"></div>
-    <div class="line" id="ebottom"></div>
-    <div class="line" id="eleft"></div>
-    <div class="line" id="eright"></div>
+    <div class="eline vertical" id="etop"></div>
+    <div class="eline vertical" id="ebottom"></div>
+
+    <div class="eline horizontal" id="eleft"></div>
+    <div class="eline horizontal" id="eright"></div>
 
 </div>
-    
+
+  
 <script>
 
 const colorPicker =
@@ -347,19 +401,91 @@ function updateEquipped() {
     const color =
     colorPicker.value;
 
-    const lines2 =
-    document.querySelectorAll(
-        "#equipped-crosshair .line"
-    );
+    const size =
+    sizeSlider.value;
 
-    lines2.forEach(line => {
+    const thickness =
+    thicknessSlider.value;
+
+    const verticals =
+    document.querySelectorAll(".vertical");
+
+    const horizontals =
+    document.querySelectorAll(".horizontal");
+
+    document.querySelectorAll(".eline")
+    .forEach(line => {
 
         line.style.background =
         color;
 
     });
 
+    verticals.forEach(line => {
+
+        line.style.height =
+        size + "px";
+
+        line.style.width =
+        thickness + "px";
+
+    });
+
+    horizontals.forEach(line => {
+
+        line.style.width =
+        size + "px";
+
+        line.style.height =
+        thickness + "px";
+
+    });
+
 }
+
+function loadCrosshair() {
+
+    const savedColor =
+    localStorage.getItem(
+        "crosshairColor"
+    );
+
+    const savedSize =
+    localStorage.getItem(
+        "crosshairSize"
+    );
+
+    const savedThickness =
+    localStorage.getItem(
+        "crosshairThickness"
+    );
+
+    if (savedColor) {
+
+        colorPicker.value =
+        savedColor;
+
+    }
+
+    if (savedSize) {
+
+        sizeSlider.value =
+        savedSize;
+
+    }
+
+    if (savedThickness) {
+
+        thicknessSlider.value =
+        savedThickness;
+
+    }
+
+    updateCrosshair();
+
+}
+
+loadCrosshair();
     
 </script>
 
