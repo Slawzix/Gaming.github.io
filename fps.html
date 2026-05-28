@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FPS Calculator</title>
+
+<style>
+
+body {
+
+    margin: 0;
+    background: #0f0f0f;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+
+}
+
+h1 {
+
+    margin-top: 40px;
+    font-size: 55px;
+
+}
+
+.container {
+
+    margin-top: 60px;
+
+}
+
+select,
+input {
+
+    width: 250px;
+
+    padding: 15px;
+
+    margin: 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #1f1f1f;
+
+    color: white;
+
+    font-size: 18px;
+
+}
+
+button {
+
+    padding: 15px 30px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+    linear-gradient(135deg,#7c3aed,#00c3ff);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    margin-top: 20px;
+
+}
+
+button:hover {
+
+    transform: scale(1.05);
+
+}
+
+#result {
+
+    margin-top: 40px;
+
+    font-size: 35px;
+
+    font-weight: bold;
+
+}
+
+.back {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    background: #222;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+}
+
+.back:hover {
+
+    background: #333;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<a class="back" href="index.html">
+⬅ Back
+</a>
+
+<h1>🎮 FPS Calculator</h1>
+
+<div class="container">
+
+<select id="game">
+
+    <option>Fortnite</option>
+    <option>Valorant</option>
+    <option>CS2</option>
+    <option>Warzone</option>
+    <option>Minecraft</option>
+
+</select>
+
+<br>
+
+<input
+type="number"
+id="fps"
+placeholder="Enter your FPS">
+
+<br>
+
+<button onclick="calculateFPS()">
+Calculate FPS
+</button>
+
+<div id="result">
+
+</div>
+
+</div>
+
+<script>
+
+function calculateFPS() {
+
+    const fps =
+    document.getElementById("fps").value;
+
+    const result =
+    document.getElementById("result");
+
+    if (fps < 60) {
+
+        result.innerHTML =
+        "❌ Bad FPS";
+
+        result.style.color =
+        "red";
+
+    }
+
+    else if (fps < 144) {
+
+        result.innerHTML =
+        "⚠️ Good FPS";
+
+        result.style.color =
+        "orange";
+
+    }
+
+    else if (fps < 240) {
+
+        result.innerHTML =
+        "✅ Great FPS";
+
+        result.style.color =
+        "lime";
+
+    }
+
+    else {
+
+        result.innerHTML =
+        "🔥 Pro Player FPS";
+
+        result.style.color =
+        "#00ccff";
+
+    }
+
+}
+
+</script>
+
+</body>
+</html>
