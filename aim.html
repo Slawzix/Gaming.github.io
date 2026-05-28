@@ -8,6 +8,47 @@
 
 <style>
 
+.settings {
+
+    margin-top: 20px;
+
+}
+
+#timeSelect {
+
+    padding: 12px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #1f1f1f;
+
+    color: white;
+
+    font-size: 18px;
+
+}
+
+#game-area {
+
+    position: relative;
+
+    width: 1000px;
+    height: 600px;
+
+    margin: 40px auto;
+
+    background: #161616;
+
+    border: 3px solid #7c3aed;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+}
+    
 body {
 
     margin: 0;
@@ -143,12 +184,27 @@ Time: 30
 Start Game
 </button>
 
-<div id="game">
+<div class="settings">
 
-<div class="target" id="target"></div>
+<select id="timeSelect">
+
+    <option value="10">10 Seconds</option>
+    <option value="20">20 Seconds</option>
+    <option value="30" selected>30 Seconds</option>
+    <option value="45">45 Seconds</option>
+    <option value="60">1 Minute</option>
+    <option value="90">1m 30s</option>
+    <option value="120">2 Minutes</option>
+
+</select>
 
 </div>
 
+<div id="game-area">
+
+    <div class="target" id="target"></div>
+
+</div>
 <script>
 
 const target =
@@ -171,13 +227,22 @@ let gameRunning = false;
 
 function randomPosition() {
 
+    const gameArea =
+    document.getElementById("game-area");
+
+    const areaWidth =
+    gameArea.clientWidth;
+
+    const areaHeight =
+    gameArea.clientHeight;
+
     const x =
     Math.random() *
-    (window.innerWidth - 100);
+    (areaWidth - target.offsetWidth);
 
     const y =
     Math.random() *
-    (window.innerHeight - 200);
+    (areaHeight - target.offsetHeight);
 
     target.style.left =
     x + "px";
@@ -196,6 +261,15 @@ target.addEventListener("click", () => {
     scoreText.innerHTML =
     "Score: " + score;
 
+    const newSize =
+    Math.max(30, 80 - (score * 0.5));
+
+    target.style.width =
+    newSize + "px";
+
+    target.style.height =
+    newSize + "px";
+
     randomPosition();
 
 });
@@ -204,15 +278,23 @@ function startGame() {
 
     score = 0;
 
-    time = 30;
-
     gameRunning = true;
+
+    target.style.width = "80px";
+    target.style.height = "80px";
+
+    const selectedTime =
+    parseInt(
+        document.getElementById("timeSelect").value
+    );
+
+    time = selectedTime;
 
     scoreText.innerHTML =
     "Score: 0";
 
     timerText.innerHTML =
-    "Time: 30";
+    "Time: " + time;
 
     randomPosition();
 
