@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>FOV Converter</title>
+
+<style>
+
+body {
+
+    margin: 0;
+    background: #0f0f0f;
+    color: white;
+    font-family: Arial;
+    text-align: center;
+
+}
+
+h1 {
+
+    margin-top: 40px;
+    font-size: 55px;
+
+}
+
+.container {
+
+    margin-top: 60px;
+
+}
+
+select,
+input {
+
+    width: 260px;
+
+    padding: 15px;
+
+    margin: 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #1f1f1f;
+
+    color: white;
+
+    font-size: 18px;
+
+}
+
+button {
+
+    padding: 15px 30px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+    linear-gradient(135deg,#7c3aed,#00c3ff);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+}
+
+button:hover {
+
+    transform: scale(1.05);
+
+}
+
+#result {
+
+    margin-top: 40px;
+
+    font-size: 35px;
+
+    font-weight: bold;
+
+}
+
+.back {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    background: #222;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<a class="back" href="fps-tools.html">
+⬅ Back
+</a>
+
+<h1>🎯 FOV Converter</h1>
+
+<div class="container">
+
+<select id="fromGame">
+
+    <option>Fortnite</option>
+    <option>Valorant</option>
+    <option>CS2</option>
+    <option>Warzone</option>
+
+</select>
+
+<br>
+
+<select id="toGame">
+
+    <option>Fortnite</option>
+    <option>Valorant</option>
+    <option>CS2</option>
+    <option>Warzone</option>
+
+</select>
+
+<br>
+
+<input
+type="number"
+id="fov"
+placeholder="Enter FOV">
+
+<br>
+
+<button onclick="convertFOV()">
+Convert
+</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+function convertFOV() {
+
+    const fov =
+    parseFloat(
+        document.getElementById("fov").value
+    );
+
+    const result =
+    document.getElementById("result");
+
+    let converted = fov;
+
+    converted =
+    Math.round(fov * 1.1);
+
+    result.innerHTML =
+    "Converted FOV: " + converted;
+
+}
+
+</script>
+
+</body>
+</html>
