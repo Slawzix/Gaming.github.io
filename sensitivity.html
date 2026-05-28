@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sensitivity Converter</title>
+
+<style>
+
+body {
+
+    margin: 0;
+
+    background:
+    linear-gradient(135deg,#0f0f0f,#151515);
+
+    color: white;
+
+    font-family: Arial;
+
+    text-align: center;
+
+}
+
+h1 {
+
+    margin-top: 40px;
+
+    font-size: 55px;
+
+}
+
+.converter {
+
+    width: 500px;
+
+    margin: 60px auto;
+
+    padding: 40px;
+
+    border-radius: 25px;
+
+    background: #1a1a1a;
+
+    border: 2px solid #7c3aed;
+
+    box-shadow:
+    0 0 30px #7c3aed55;
+
+}
+
+select,input {
+
+    width: 80%;
+
+    padding: 15px;
+
+    margin-top: 20px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #222;
+
+    color: white;
+
+    font-size: 18px;
+
+}
+
+button {
+
+    margin-top: 30px;
+
+    padding: 15px 35px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+    linear-gradient(135deg,#7c3aed,#00c3ff);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+}
+
+#result {
+
+    margin-top: 30px;
+
+    font-size: 35px;
+
+    color: #00ffcc;
+
+}
+
+.back {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    padding: 12px 20px;
+
+    background: #222;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<a class="back" href="fps-tools.html">
+⬅ Back
+</a>
+
+<h1>⚡ Sensitivity Converter</h1>
+
+<div class="converter">
+
+<select id="fromGame">
+
+<option value="valorant">
+Valorant
+</option>
+
+<option value="csgo">
+CS2
+</option>
+
+<option value="fortnite">
+Fortnite
+</option>
+
+<option value="apex">
+Apex Legends
+</option>
+
+</select>
+
+<select id="toGame">
+
+<option value="valorant">
+Valorant
+</option>
+
+<option value="csgo">
+CS2
+</option>
+
+<option value="fortnite">
+Fortnite
+</option>
+
+<option value="apex">
+Apex Legends
+</option>
+
+</select>
+
+<input
+type="number"
+id="sens"
+placeholder="Enter Sensitivity"
+step="0.01"
+>
+
+<br>
+
+<button onclick="convertSens()">
+Convert
+</button>
+
+<div id="result">
+0
+</div>
+
+</div>
+
+<script>
+
+const ratios = {
+
+    valorant: 1,
+
+    csgo: 3.181818,
+
+    fortnite: 8,
+
+    apex: 3.181818
+
+};
+
+function convertSens() {
+
+    const from =
+    document.getElementById("fromGame").value;
+
+    const to =
+    document.getElementById("toGame").value;
+
+    const sens =
+    parseFloat(
+        document.getElementById("sens").value
+    );
+
+    if (!sens) return;
+
+    const baseValue =
+    sens / ratios[from];
+
+    const converted =
+    baseValue * ratios[to];
+
+    document.getElementById("result")
+    .innerHTML =
+    converted.toFixed(3);
+
+}
+
+</script>
+
+</body>
+</html>
