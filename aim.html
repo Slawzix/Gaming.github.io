@@ -226,6 +226,10 @@ button {
 
 <body>
 
+<audio id="hitSound">
+<source src="hit.mp3" type="audio/mpeg">
+</audio>
+    
 <a class="back" href="fps-tools.html">
 ⬅ Back
 </a>
@@ -240,6 +244,27 @@ Score: 0
 Time: 30
 </div>
 
+<div id="accuracy">
+Accuracy: 100%
+</div>
+    
+<br><br>
+
+<input
+type="text"
+id="playerName"
+placeholder="Your Name"
+maxlength="12"
+style="
+padding:12px;
+border-radius:10px;
+border:none;
+font-size:18px;
+background:#1f1f1f;
+color:white;
+"
+>
+    
 <button onclick="startGame()">
 Start Game
 </button>
@@ -276,9 +301,30 @@ Start Game
 
     </div>
 
+
+    
 </div>
 <script>
 
+let hits = 0;
+let clicks = 0;
+
+document
+.getElementById("game-area")
+.addEventListener("click", (e) => {
+
+    if (!gameRunning) return;
+
+    if (e.target.id !== "target") {
+
+        clicks++;
+
+        updateAccuracy();
+
+    }
+
+});
+    
 const target =
 document.getElementById("target");
 
@@ -325,7 +371,13 @@ target.addEventListener("click", () => {
 
     if (!gameRunning) return;
 
+    clicks++;
     score++;
+    hits++;
+
+    document.getElementById("hitSound").play();
+
+    updateAccuracy();
 
     scoreText.innerHTML =
     "Score: " + score;
@@ -343,8 +395,32 @@ target.addEventListener("click", () => {
 
 });
 
+function updateAccuracy() {
+
+    let accuracy = 0;
+
+    if (clicks > 0) {
+
+        accuracy =
+        Math.round((hits / clicks) * 100);
+
+    }
+
+    document.getElementById("accuracy")
+    .innerHTML =
+    "Accuracy: " + accuracy + "%";
+
+}
+    
 function startGame() {
 
+hits = 0;
+clicks = 0;
+
+document.getElementById("accuracy")
+.innerHTML =
+"Accuracy: 100%";
+    
     score = 0;
 
     gameRunning = true;
@@ -397,7 +473,11 @@ updateLeaderboard();
 
 randomPosition();
 
- function saveScore(score, timeMode) {
+function saveScore(score, timeMode) {
+
+    const player =
+    document.getElementById("playerName").value
+    || "Anonymous";
 
     let scores =
     JSON.parse(
@@ -410,12 +490,38 @@ randomPosition();
 
     }
 
-    scores[timeMode].push(score);
+    const existing =
+    scores[timeMode].find(
+        s => s.name === player
+    );
 
-    scores[timeMode].sort((a,b) => b - a);
+    if (existing) {
+
+        if (score > existing.score) {
+
+            existing.score = score;
+
+        }
+
+    }
+
+    else {
+
+        scores[timeMode].push({
+
+            name: player,
+            score: score
+
+        });
+
+    }
+
+    scores[timeMode].sort(
+        (a,b) => b.score - a.score
+    );
 
     scores[timeMode] =
-    scores[timeMode].slice(0, 5);
+    scores[timeMode].slice(0,5);
 
     localStorage.setItem(
         "aimScores",
@@ -451,15 +557,17 @@ function updateLeaderboard() {
 
     }
 
-    currentScores.forEach((score, index) => {
+   currentScores.forEach((score, index) => {
 
-        scoresDiv.innerHTML += `
-        <div class="score-entry">
-            #${index + 1} — ${score} Hits
-        </div>
-        `;
+    scoresDiv.innerHTML += `
+    <div class="score-entry">
+        #${index + 1} — ${score.name}
+        <br>
+        ${score.score} Hits
+    </div>
+    `;
 
-    });
+});
 
 }
 
