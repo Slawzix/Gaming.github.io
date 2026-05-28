@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Fake Lootbox</title>
+
+<style>
+
+body {
+
+    margin: 0;
+    font-family: Arial;
+    background: #0f0f0f;
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+
+}
+
+h1 {
+
+    margin-top: 30px;
+    font-size: 55px;
+
+}
+
+#case {
+
+    width: 700px;
+    height: 220px;
+
+    margin: 50px auto;
+
+    border-radius: 25px;
+
+    background:
+    linear-gradient(135deg,#151515,#0d0d0d);
+
+    border: 3px solid #7c3aed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 45px;
+
+    box-shadow:
+    0 0 30px #7c3aed55;
+
+}
+
+button {
+
+    padding: 18px 40px;
+
+    border: none;
+
+    border-radius: 15px;
+
+    background:
+    linear-gradient(135deg,#7c3aed,#00c3ff);
+
+    color: white;
+
+    font-size: 22px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+button:hover {
+
+    transform: scale(1.05);
+
+}
+
+.layout {
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+
+    margin-top: 40px;
+
+}
+
+#inventory {
+
+    width: 500px;
+
+    background: #151515;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    border: 2px solid #7c3aed;
+
+}
+
+.item {
+
+    margin: 10px 0;
+
+    padding: 12px;
+
+    border-radius: 12px;
+
+    background: rgba(255,255,255,0.05);
+
+}
+
+#leaderboard {
+
+    width: 300px;
+
+    background: #151515;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    border: 2px solid #00c3ff;
+
+}
+
+.rank {
+
+    margin: 12px 0;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.05);
+
+}
+
+.common {
+color: #bbbbbb;
+}
+
+.rare {
+color: #00c3ff;
+}
+
+.epic {
+color: #cc66ff;
+}
+
+.legendary {
+color: gold;
+}
+
+.mythic {
+
+color: #ff003c;
+
+text-shadow:
+0 0 15px #ff003c;
+
+}
+
+.back {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    background: #222;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+}
+
+#value {
+
+    margin-top: 20px;
+
+    font-size: 28px;
+
+    color: #00ffcc;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<a class="back" href="fun-tools.html">
+⬅ Back
+</a>
+
+<h1>🎁 Fake Lootbox</h1>
+
+<input
+type="text"
+id="playerName"
+placeholder="Your Name"
+maxlength="12"
+style="
+padding:12px;
+border-radius:10px;
+border:none;
+font-size:18px;
+background:#1f1f1f;
+color:white;
+"
+>
+
+<br><br>
+
+<button onclick="openCase()">
+OPEN CASE
+</button>
+
+<div id="case">
+???
+</div>
+
+<div id="value">
+Inventory Value: $0
+</div>
+
+<div class="layout">
+
+<div id="inventory">
+
+<h2>🎒 Inventory</h2>
+
+<div id="items"></div>
+
+</div>
+
+<div id="leaderboard">
+
+<h2>🏆 Richest Players</h2>
+
+<div id="ranks"></div>
+
+</div>
+
+</div>
+
+<script>
+
+const loot = [
+
+{
+name:"Rusty Pistol",
+rarity:"common",
+value:5,
+chance:45
+},
+
+{
+name:"Carbon SMG",
+rarity:"rare",
+value:40,
+chance:30
+},
+
+{
+name:"Dragon Sniper",
+rarity:"epic",
+value:150,
+chance:15
+},
+
+{
+name:"Golden AK47",
+rarity:"legendary",
+value:700,
+chance:8
+},
+
+{
+name:"Shadow Blade",
+rarity:"mythic",
+value:5000,
+chance:2
+}
+
+];
+
+let inventory = [];
+
+function getRandomItem() {
+
+    const rand =
+    Math.random() * 100;
+
+    let total = 0;
+
+    for (let item of loot) {
+
+        total += item.chance;
+
+        if (rand <= total) {
+
+            return item;
+
+        }
+
+    }
+
+}
+
+function openCase() {
+
+    const display =
+    document.getElementById("case");
+
+    let spin = 0;
+
+    const animation =
+    setInterval(() => {
+
+        const random =
+        loot[Math.floor(Math.random()*loot.length)];
+
+        display.innerHTML =
+        random.name;
+
+        display.className =
+        random.rarity;
+
+        spin++;
+
+        if (spin >= 20) {
+
+            clearInterval(animation);
+
+            const won =
+            getRandomItem();
+
+            display.innerHTML =
+            won.name;
+
+            display.className =
+            won.rarity;
+
+            inventory.push(won);
+
+            updateInventory();
+
+            saveLeaderboard();
+
+        }
+
+    }, 80);
+
+}
+
+function updateInventory() {
+
+    const items =
+    document.getElementById("items");
+
+    items.innerHTML = "";
+
+    let totalValue = 0;
+
+    inventory.forEach(item => {
+
+        totalValue += item.value;
+
+        items.innerHTML += `
+        <div class="item ${item.rarity}">
+        ${item.name} — $${item.value}
+        </div>
+        `;
+
+    });
+
+    document.getElementById("value")
+    .innerHTML =
+    "Inventory Value: $" + totalValue;
+
+}
+
+function saveLeaderboard() {
+
+    const player =
+    document.getElementById("playerName").value
+    || "Anonymous";
+
+    let totalValue = 0;
+
+    inventory.forEach(item => {
+
+        totalValue += item.value;
+
+    });
+
+    let board =
+    JSON.parse(
+        localStorage.getItem("lootLeaderboard")
+    ) || [];
+
+    const existing =
+    board.find(p => p.name === player);
+
+    if (existing) {
+
+        existing.value = totalValue;
+
+    }
+
+    else {
+
+        board.push({
+
+            name: player,
+            value: totalValue
+
+        });
+
+    }
+
+    board.sort((a,b) => b.value - a.value);
+
+    board = board.slice(0, 10);
+
+    localStorage.setItem(
+        "lootLeaderboard",
+        JSON.stringify(board)
+    );
+
+    updateLeaderboard();
+
+}
+
+function updateLeaderboard() {
+
+    const ranks =
+    document.getElementById("ranks");
+
+    let board =
+    JSON.parse(
+        localStorage.getItem("lootLeaderboard")
+    ) || [];
+
+    ranks.innerHTML = "";
+
+    board.forEach((player,index) => {
+
+        ranks.innerHTML += `
+        <div class="rank">
+        #${index + 1} — ${player.name}
+        <br>
+        💰 $${player.value}
+        </div>
+        `;
+
+    });
+
+}
+
+updateLeaderboard();
+
+</script>
+
+</body>
+</html>
