@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Challenge Generator</title>
+
+<style>
+
+body {
+
+    margin: 0;
+    font-family: Arial;
+    background: #0f0f0f;
+    color: white;
+    text-align: center;
+
+}
+
+h1 {
+
+    margin-top: 40px;
+    font-size: 55px;
+
+}
+
+select {
+
+    margin-top: 20px;
+
+    padding: 15px 25px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #1f1f1f;
+
+    color: white;
+
+    font-size: 18px;
+
+}
+
+button {
+
+    margin-top: 25px;
+
+    padding: 16px 35px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+    linear-gradient(135deg,#7c3aed,#00c3ff);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+
+}
+
+button:hover {
+
+    transform: scale(1.05);
+
+}
+
+#challenge {
+
+    margin: 60px auto;
+
+    width: 700px;
+
+    min-height: 120px;
+
+    padding: 30px;
+
+    border-radius: 20px;
+
+    background:
+    linear-gradient(135deg,#151515,#101010);
+
+    border: 2px solid #7c3aed;
+
+    box-shadow:
+    0 0 25px #7c3aed55;
+
+    font-size: 32px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.back {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    background: #222;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<a class="back" href="fun-tools.html">
+⬅ Back
+</a>
+
+<h1>🎲 Random Challenge Generator</h1>
+
+<select id="category">
+
+<option value="fps">🎯 FPS</option>
+
+<option value="battle">🛡 Battle Royale</option>
+
+<option value="survival">⚔ Survival</option>
+
+<option value="racing">🚗 Racing</option>
+
+<option value="minecraft">🧱 Minecraft</option>
+
+<option value="sports">⚽ Sports</option>
+
+<option value="horror">👻 Horror</option>
+
+<option value="fun">😂 Fun</option>
+
+<option value="impossible">🧠 Impossible</option>
+
+</select>
+
+<br>
+
+<button onclick="generateChallenge()">
+Generate Challenge
+</button>
+
+<div id="challenge">
+
+Click Generate
+
+</div>
+
+<script>
+
+const challenges = {
+
+fps: [
+
+"Only use pistols",
+"No reloading challenge",
+"360 before every kill",
+"Play with max sensitivity",
+"Knife only",
+"No jumping allowed",
+"One tap challenge",
+"Only hipfire",
+"Reverse controls challenge"
+
+],
+
+battle: [
+
+"Land at the hottest spot",
+"No shield challenge",
+"Win without healing",
+"Only grey weapons",
+"Hide until top 5",
+"Random loadout only",
+"No sprinting",
+"Vehicle only challenge"
+
+],
+
+survival: [
+
+"Survive with one life",
+"No crafting challenge",
+"Night only challenge",
+"Use only melee weapons",
+"No food challenge"
+
+],
+
+racing: [
+
+"First person only",
+"No braking challenge",
+"Drift every corner",
+"Last to first challenge",
+"Random car only"
+
+],
+
+minecraft: [
+
+"No tools challenge",
+"Hardcore mode",
+"Wood only build",
+"No armor challenge",
+"Underground only"
+
+],
+
+sports: [
+
+"Score only headers",
+"No sprint challenge",
+"One player only",
+"Long shots only"
+
+],
+
+horror: [
+
+"Lights off challenge",
+"No running challenge",
+"Max volume challenge",
+"Don't hide challenge"
+
+],
+
+fun: [
+
+"Play upside down",
+"Switch keybinds",
+"Sing while gaming",
+"Use random settings",
+"Play blindfolded for 10 sec"
+
+],
+
+impossible: [
+
+"No damage challenge",
+"Win with default settings",
+"1 HP challenge",
+"No HUD challenge",
+"Perfect accuracy only"
+
+]
+
+};
+
+function generateChallenge() {
+
+    const category =
+    document.getElementById("category").value;
+
+    const list =
+    challenges[category];
+
+    const random =
+    list[Math.floor(Math.random() * list.length)];
+
+    document.getElementById("challenge")
+    .innerHTML = random;
+
+}
+
+</script>
+
+</body>
+</html>
