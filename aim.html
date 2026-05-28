@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Aim Trainer</title>
+
+<style>
+
+body {
+
+    margin: 0;
+    overflow: hidden;
+
+    background: #0f0f0f;
+
+    color: white;
+
+    font-family: Arial;
+
+    text-align: center;
+
+}
+
+h1 {
+
+    margin-top: 20px;
+
+    font-size: 50px;
+
+}
+
+#score {
+
+    font-size: 30px;
+
+    margin-top: 10px;
+
+}
+
+#timer {
+
+    font-size: 28px;
+
+    margin-top: 10px;
+
+}
+
+#game {
+
+    position: relative;
+
+    width: 100vw;
+    height: 80vh;
+
+}
+
+.target {
+
+    position: absolute;
+
+    width: 80px;
+    height: 80px;
+
+    border-radius: 50%;
+
+    background:
+    radial-gradient(circle,#ff004c,#9900ff);
+
+    cursor: pointer;
+
+    transition: 0.05s;
+
+}
+
+.target:hover {
+
+    transform: scale(1.1);
+
+}
+
+button {
+
+    padding: 15px 30px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+    linear-gradient(135deg,#7c3aed,#00c3ff);
+
+    color: white;
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    margin-top: 20px;
+
+}
+
+.back {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    background: #222;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<a class="back" href="fps-tools.html">
+⬅ Back
+</a>
+
+<h1>🎯 Aim Trainer</h1>
+
+<div id="score">
+Score: 0
+</div>
+
+<div id="timer">
+Time: 30
+</div>
+
+<button onclick="startGame()">
+Start Game
+</button>
+
+<div id="game">
+
+<div class="target" id="target"></div>
+
+</div>
+
+<script>
+
+const target =
+document.getElementById("target");
+
+const game =
+document.getElementById("game");
+
+const scoreText =
+document.getElementById("score");
+
+const timerText =
+document.getElementById("timer");
+
+let score = 0;
+
+let time = 30;
+
+let gameRunning = false;
+
+function randomPosition() {
+
+    const x =
+    Math.random() *
+    (window.innerWidth - 100);
+
+    const y =
+    Math.random() *
+    (window.innerHeight - 200);
+
+    target.style.left =
+    x + "px";
+
+    target.style.top =
+    y + "px";
+
+}
+
+target.addEventListener("click", () => {
+
+    if (!gameRunning) return;
+
+    score++;
+
+    scoreText.innerHTML =
+    "Score: " + score;
+
+    randomPosition();
+
+});
+
+function startGame() {
+
+    score = 0;
+
+    time = 30;
+
+    gameRunning = true;
+
+    scoreText.innerHTML =
+    "Score: 0";
+
+    timerText.innerHTML =
+    "Time: 30";
+
+    randomPosition();
+
+    const countdown =
+    setInterval(() => {
+
+        time--;
+
+        timerText.innerHTML =
+        "Time: " + time;
+
+        if (time <= 0) {
+
+            clearInterval(countdown);
+
+            gameRunning = false;
+
+            alert(
+                "Game Over! Score: " + score
+            );
+
+        }
+
+    }, 1000);
+
+}
+
+randomPosition();
+
+</script>
+
+</body>
+</html>
