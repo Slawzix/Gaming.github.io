@@ -8,6 +8,57 @@
 
 <style>
 
+    .layout {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: flex-start;
+
+    gap: 40px;
+
+    margin-top: 30px;
+
+}
+
+#leaderboard {
+
+    width: 280px;
+
+    background:
+    linear-gradient(135deg,#161616,#101010);
+
+    border: 2px solid #7c3aed;
+
+    border-radius: 20px;
+
+    padding: 20px;
+
+    box-shadow:
+    0 0 20px #7c3aed55;
+
+}
+
+#leaderboard h2 {
+
+    margin-top: 0;
+
+    color: #00c3ff;
+
+}
+
+.score-entry {
+
+    margin: 12px 0;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.05);
+
+}
 .settings {
 
     margin-top: 20px;
@@ -35,24 +86,29 @@
     position: relative;
 
     width: 1000px;
-    height: 600px;
+    height: 500px;
 
     margin: 40px auto;
 
-    background: #161616;
+    background:
+    linear-gradient(135deg,#151515,#0f0f0f);
 
     border: 3px solid #7c3aed;
 
-    border-radius: 20px;
+    border-radius: 25px;
 
     overflow: hidden;
+
+    box-shadow:
+    0 0 30px #7c3aed55,
+    inset 0 0 20px #000;
 
 }
     
 body {
 
     margin: 0;
-    overflow: hidden;
+    overflow-x: hidden;
 
     background: #0f0f0f;
 
@@ -113,6 +169,10 @@ h1 {
 
     transition: 0.05s;
 
+    box-shadow:
+    0 0 20px #ff00aa,
+    0 0 40px #9900ff;
+    
 }
 
 .target:hover {
@@ -200,18 +260,27 @@ Start Game
 
 </div>
 
-<div id="game-area">
+<div class="layout">
 
-    <div class="target" id="target"></div>
+    <div id="game-area">
+
+        <div class="target" id="target"></div>
+
+    </div>
+
+    <div id="leaderboard">
+
+        <h2>🏆 Leaderboard</h2>
+
+        <div id="scores"></div>
+
+    </div>
 
 </div>
 <script>
 
 const target =
 document.getElementById("target");
-
-const game =
-document.getElementById("game");
 
 const scoreText =
 document.getElementById("score");
@@ -312,9 +381,13 @@ function startGame() {
 
             gameRunning = false;
 
-            alert(
-                "Game Over! Score: " + score
-            );
+         alert(
+    "Game Over! Score: " + score
+);
+
+saveScore(score, selectedTime);
+
+updateLeaderboard();
 
         }
 
@@ -324,6 +397,76 @@ function startGame() {
 
 randomPosition();
 
+ function saveScore(score, timeMode) {
+
+    let scores =
+    JSON.parse(
+        localStorage.getItem("aimScores")
+    ) || {};
+
+    if (!scores[timeMode]) {
+
+        scores[timeMode] = [];
+
+    }
+
+    scores[timeMode].push(score);
+
+    scores[timeMode].sort((a,b) => b - a);
+
+    scores[timeMode] =
+    scores[timeMode].slice(0, 5);
+
+    localStorage.setItem(
+        "aimScores",
+        JSON.stringify(scores)
+    );
+
+}
+
+function updateLeaderboard() {
+
+    const scoresDiv =
+    document.getElementById("scores");
+
+    const selectedTime =
+    document.getElementById("timeSelect").value;
+
+    let scores =
+    JSON.parse(
+        localStorage.getItem("aimScores")
+    ) || {};
+
+    const currentScores =
+    scores[selectedTime] || [];
+
+    scoresDiv.innerHTML = "";
+
+    if (currentScores.length === 0) {
+
+        scoresDiv.innerHTML =
+        "<p>No scores yet</p>";
+
+        return;
+
+    }
+
+    currentScores.forEach((score, index) => {
+
+        scoresDiv.innerHTML += `
+        <div class="score-entry">
+            #${index + 1} — ${score} Hits
+        </div>
+        `;
+
+    });
+
+}
+
+document.getElementById("timeSelect")
+.addEventListener("change", updateLeaderboard);
+
+updateLeaderboard();   
 </script>
 
 </body>
