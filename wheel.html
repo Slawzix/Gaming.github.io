@@ -158,6 +158,48 @@ button {
 
 }
 
+#wheel-container {
+
+    position: relative;
+
+    width: 450px;
+    height: 450px;
+
+    margin: 40px auto;
+
+}
+
+#wheel-labels {
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+
+}
+
+.label {
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform-origin: 0 0;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    color: white;
+
+}
+    
 </style>
 </head>
 
@@ -171,8 +213,13 @@ button {
 
 <div id="pointer"></div>
 
-<div id="wheel"></div>
+ <div id="wheel-container">
 
+    <div id="wheel"></div>
+
+    <div id="wheel-labels"></div>
+
+</div>
 <input
 type="text"
 id="itemInput"
@@ -272,6 +319,40 @@ function updateWheel() {
     wheel.style.background =
     `conic-gradient(${gradient})`;
 
+const labels =
+document.getElementById("wheel-labels");
+
+labels.innerHTML = "";
+
+wheelItems.forEach((item,index) => {
+
+    const angle =
+    (360 / wheelItems.length) * index;
+
+    const radius = 150;
+
+    const x =
+    Math.cos((angle - 90) * Math.PI/180)
+    * radius;
+
+    const y =
+    Math.sin((angle - 90) * Math.PI/180)
+    * radius;
+
+    labels.innerHTML += `
+    <div class="label"
+    style="
+    transform:
+    translate(${225 + x}px,
+    ${225 + y}px)
+    rotate(${angle}deg);
+    ">
+    ${item}
+    </div>
+    `;
+
+});
+    
     localStorage.setItem(
         "wheelItems",
         JSON.stringify(wheelItems)
