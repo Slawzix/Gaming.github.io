@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wheel Spinner</title>
+
+<style>
+
+body {
+
+    margin: 0;
+    font-family: Arial;
+    background: #0f0f0f;
+    color: white;
+    text-align: center;
+
+}
+
+h1 {
+
+    margin-top: 30px;
+    font-size: 55px;
+
+}
+
+#wheel {
+
+    width: 450px;
+    height: 450px;
+
+    border-radius: 50%;
+
+    margin: 40px auto;
+
+    border: 10px solid #7c3aed;
+
+    background:
+    conic-gradient(
+    #7c3aed 0deg 60deg,
+    #00c3ff 60deg 120deg,
+    #ff0077 120deg 180deg,
+    #00ffcc 180deg 240deg,
+    #ffaa00 240deg 300deg,
+    #ff3333 300deg 360deg
+    );
+
+    position: relative;
+
+    transition:
+    transform 4s cubic-bezier(.17,.67,.16,.99);
+
+    box-shadow:
+    0 0 30px #7c3aed88;
+
+}
+
+#pointer {
+
+    width: 0;
+    height: 0;
+
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+
+    border-top: 40px solid white;
+
+    margin: auto;
+
+}
+
+input {
+
+    padding: 14px;
+
+    width: 250px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #1a1a1a;
+
+    color: white;
+
+    font-size: 18px;
+
+}
+
+button {
+
+    padding: 14px 25px;
+
+    margin: 10px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background:
+    linear-gradient(135deg,#7c3aed,#00c3ff);
+
+    color: white;
+
+    font-size: 18px;
+
+    cursor: pointer;
+
+}
+
+#items {
+
+    margin-top: 30px;
+
+}
+
+.item {
+
+    margin: 10px auto;
+
+    width: 300px;
+
+    padding: 10px;
+
+    border-radius: 10px;
+
+    background: rgba(255,255,255,0.05);
+
+}
+
+#result {
+
+    margin-top: 30px;
+
+    font-size: 35px;
+
+    color: #00ffcc;
+
+}
+
+.back {
+
+    position: absolute;
+
+    top: 20px;
+    left: 20px;
+
+    background: #222;
+
+    color: white;
+
+    padding: 12px 20px;
+
+    text-decoration: none;
+
+    border-radius: 10px;
+
+}
+
+</style>
+</head>
+
+<body>
+
+<a class="back" href="fun-tools.html">
+⬅ Back
+</a>
+
+<h1>🎡 Wheel Spinner</h1>
+
+<div id="pointer"></div>
+
+<div id="wheel"></div>
+
+<input
+type="text"
+id="itemInput"
+placeholder="Add something..."
+>
+
+<br>
+
+<button onclick="addItem()">
+➕ Add
+</button>
+
+<button onclick="spinWheel()">
+🎲 Spin
+</button>
+
+<div id="result">
+???
+</div>
+
+<div id="items"></div>
+
+<script>
+
+let wheelItems = [];
+
+let rotation = 0;
+
+const wheel =
+document.getElementById("wheel");
+
+function updateWheel() {
+
+    const itemsDiv =
+    document.getElementById("items");
+
+    itemsDiv.innerHTML = "";
+
+    if (wheelItems.length === 0) {
+
+        wheel.style.background = "#222";
+
+        return;
+
+    }
+
+    const colors = [
+
+        "#7c3aed",
+        "#00c3ff",
+        "#ff0077",
+        "#00ffcc",
+        "#ffaa00",
+        "#ff3333",
+        "#66ff66",
+        "#3399ff",
+        "#ff66cc",
+        "#ffff66"
+
+    ];
+
+    let gradient = "";
+
+    const size =
+    360 / wheelItems.length;
+
+    wheelItems.forEach((item,index) => {
+
+        const start =
+        index * size;
+
+        const end =
+        start + size;
+
+        gradient += `
+        ${colors[index % colors.length]}
+        ${start}deg ${end}deg
+        `;
+
+        if (index < wheelItems.length - 1) {
+
+            gradient += ",";
+
+        }
+
+        itemsDiv.innerHTML += `
+        <div class="item">
+        ${item}
+        <button onclick="removeItem(${index})">
+        ❌
+        </button>
+        </div>
+        `;
+
+    });
+
+    wheel.style.background =
+    `conic-gradient(${gradient})`;
+
+    localStorage.setItem(
+        "wheelItems",
+        JSON.stringify(wheelItems)
+    );
+
+}
+
+function addItem() {
+
+    const input =
+    document.getElementById("itemInput");
+
+    const value =
+    input.value.trim();
+
+    if (value === "")
+    return;
+
+    wheelItems.push(value);
+
+    input.value = "";
+
+    updateWheel();
+
+}
+
+function removeItem(index) {
+
+    wheelItems.splice(index,1);
+
+    updateWheel();
+
+}
+
+function spinWheel() {
+
+    if (wheelItems.length === 0)
+    return;
+
+    const randomIndex =
+    Math.floor(
+        Math.random() * wheelItems.length
+    );
+
+    const slice =
+    360 / wheelItems.length;
+
+    const target =
+    (randomIndex * slice);
+
+    rotation +=
+    1440 - target;
+
+    wheel.style.transform =
+    `rotate(${rotation}deg)`;
+
+    setTimeout(() => {
+
+        document.getElementById("result")
+        .innerHTML =
+        "🎉 " + wheelItems[randomIndex];
+
+    }, 4000);
+
+}
+
+function loadItems() {
+
+    const saved =
+    JSON.parse(
+        localStorage.getItem("wheelItems")
+    );
+
+    if (saved) {
+
+        wheelItems = saved;
+
+    }
+
+    updateWheel();
+
+}
+
+loadItems();
+
+</script>
+
+</body>
+</html>
