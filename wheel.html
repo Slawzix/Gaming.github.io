@@ -187,16 +187,19 @@ button {
 
     position: absolute;
 
-    left: 50%;
-    top: 50%;
-
-    transform-origin: 0 0;
-
-    font-size: 16px;
+    font-size: 14px;
 
     font-weight: bold;
 
     color: white;
+
+    text-shadow: 0 0 5px black;
+
+    text-align: center;
+
+    width: 80px;
+
+    pointer-events: none;
 
 }
     
@@ -341,17 +344,16 @@ wheelItems.forEach((item,index) => {
     Math.sin((angle - 90) * Math.PI/180)
     * radius;
 
-    labels.innerHTML += `
-    <div class="label"
-    style="
-    transform:
-    translate(${225 + x}px,
-    ${225 + y}px)
-    rotate(${angle}deg);
-    ">
-    ${item}
-    </div>
-    `;
+   labels.innerHTML += `
+<div class="label"
+style="
+left:${225 + x}px;
+top:${225 + y}px;
+transform:translate(-50%,-50%);
+">
+${item}
+</div>
+`;
 
 });
     
