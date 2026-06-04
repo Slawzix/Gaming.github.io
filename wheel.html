@@ -331,10 +331,12 @@ labels.innerHTML = "";
 
 wheelItems.forEach((item,index) => {
 
-    const angle =
-    (360 / wheelItems.length) * index;
+  const angle =
+((360 / wheelItems.length) * index)
++
+((360 / wheelItems.length) / 2);
 
-    const radius = 150;
+    const radius = 90;
 
     const x =
     Math.cos((angle - 90) * Math.PI/180)
